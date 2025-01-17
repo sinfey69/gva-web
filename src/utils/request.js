@@ -1,5 +1,5 @@
 import axios from 'axios' // 引入axios
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import { store } from '@/store'
 import context from '@/main'
 
@@ -79,7 +79,7 @@ service.interceptors.response.use(
   },
   error => {
     closeLoading()
-    MessageBox.confirm(`
+    ElMessageBox.confirm(`
     <p>检测到接口错误${error}</p>
     <p>错误码500：此类错误内容常见于后台panic，如果影响您正常使用可强制登出清理缓存</p>
     <p>错误码404：此类错误多为接口未注册（或未重启）或者请求路径（方法）与api路径（方法）不符</p>

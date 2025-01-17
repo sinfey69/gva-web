@@ -58,7 +58,7 @@ export const router = {
       formatRouter(asyncRouter)
       baseRouter[0].children = asyncRouter
       baseRouter.push({
-        path: '*',
+        path: '/:pathMatch(.*)*', // vue2是用*，在vue3得改成这样
         redirect: '/layout/404'
       })
       asyncRouterHandle(baseRouter)
@@ -69,7 +69,10 @@ export const router = {
   },
   getters: {
     // 获取动态路由
-    asyncRouters(state) {
+    // asyncRouters(state) {
+    //   return state.asyncRouters
+    // },
+    asyncRouters: (state) => {
       return state.asyncRouters
     },
     routerList(state) {

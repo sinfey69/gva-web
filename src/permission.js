@@ -5,7 +5,7 @@ import getPageTitle from '@/utils/page'
 let asyncRouterFlag = 0
 
 const whiteList = ['Login', 'Init']
-router.beforeEach(async(to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   const token = store.getters['user/token']
   // 在白名单中的判断情况
   // 修改网页标签名称
@@ -25,7 +25,9 @@ router.beforeEach(async(to, from, next) => {
         await store.dispatch('router/SetAsyncRouter')
         await store.dispatch('user/GetUserInfo')
         const asyncRouters = store.getters['router/asyncRouters']
-        router.addRoutes(asyncRouters)
+        asyncRouters.forEach((route) => {
+          router.addRoute(route); // 将动态路由添加到指定的父路由
+        })
         next({ ...to, replace: true })
       } else {
         if (to.matched.length) {

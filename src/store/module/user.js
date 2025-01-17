@@ -71,14 +71,14 @@ export const user = {
         commit('setToken', res.data.token)
         await dispatch('router/SetAsyncRouter', {}, { root: true })
         const asyncRouters = rootGetters['router/asyncRouters']
-        router.addRoutes(asyncRouters)
-        // const redirect = router.history.current.query.redirect
-        // console.log(redirect)
-        // if (redirect) {
-        //     router.push({ path: redirect })
-        // } else {
+        asyncRouters.forEach((route) => {
+          try {
+            router.addRoute(route) // 将动态路由添加到指定的父路由
+          } catch (error) {
+            console.error('Error adding route:', error);
+          }
+        })
         router.push({ name: getters['userInfo'].authority.defaultRouter })
-        // }
         return true
       }
     },

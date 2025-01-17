@@ -57,18 +57,6 @@
         </el-col>
       </div>
     </el-row>
-    <el-row>
-      <el-card shadow="hover">
-        <h2>
-          使用教学：<a style="color:#409EFF" target="view_window" href="https://www.bilibili.com/video/BV1fV411y7dT/">https://www.bilibili.com/video/BV1fV411y7dT/</a>
-        </h2>
-        <br>
-        <h2>
-          工作流教学：<a style="color:#409EFF" target="view_window" href="https://www.bilibili.com/video/BV1Ka411F7Ji/">https://www.bilibili.com/video/BV1Ka411F7Ji/</a>
-        </h2>
-        <div />
-      </el-card>
-    </el-row>
     <div class="shadow">
       <el-row :gutter="20">
         <el-col
@@ -85,35 +73,14 @@
         </el-col>
       </el-row>
     </div>
-    <div class="bottom">
-      <el-row :gutter="32">
-        <el-col :xs="24" :sm="24" :lg="12">
-          <div class="chart-player">
-            <music-player />
-          </div>
-        </el-col>
-        <el-col :xs="24" :sm="24" :lg="12">
-          <div class="chart-player">
-            <todo-list />
-          </div>
-        </el-col>
-      </el-row>
-    </div>
   </div>
 </template>
 
 <script>
-import musicPlayer from './component/musicPlayer'
-import TodoList from './component/todoList'
 import { mapGetters } from 'vuex'
 export default {
   name: 'Dashboard',
   components: {
-    musicPlayer, // 音乐播放器
-    TodoList // TodoList
-    // RaddarChart, //雷达图
-    // stackMap, //堆叠图
-    // Sunburst, //旭日图
   },
   data() {
     return {
