@@ -598,7 +598,7 @@ li {
             background-color: vars.$bg-aside;
         }
 
-        .el-submenu {
+        .el-sub-menu {
             background-color: vars.$bg-aside;
 
             .el-menu {
@@ -638,12 +638,12 @@ li {
             color: #fff;
         }
 
-        .el-submenu__title:hover {
+        .el-sub-menu__title:hover {
             background-color: vars.$bg-aside;
         }
 
-        .el-submenu__title:hover i,
-        .el-submenu__title:hover span {
+        .el-sub-menu__title:hover i,
+        .el-sub-menu__title:hover span {
             color: #fff;
         }
 
@@ -1298,7 +1298,7 @@ $mainHight: 100vh;
             li {
 
                 .el-tooltip,
-                .el-submenu__title {
+                .el-sub-menu__title {
                     padding: 0px 15px !important;
                 }
             }

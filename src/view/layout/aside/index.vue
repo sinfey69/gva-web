@@ -84,13 +84,13 @@ export default {
 </script>
 
 <style lang="scss">
-.el-submenu__title,.el-menu-item{
+.el-sub-menu__title,.el-menu-item{
   i{
     color: inherit !important;
   }
 }
 
-.el-submenu__title:hover,.el-menu-item:hover{
+.el-sub-menu__title:hover,.el-menu-item:hover{
   i{
     color: inherit !important;
   }
