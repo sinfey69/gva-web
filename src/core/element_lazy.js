@@ -50,10 +50,12 @@ import {
   ElTag,
   ElTooltip,
   ElTree,
-  ElUpload
+  ElUpload,
+  ElIcon
 } from 'element-plus';
 
 import 'element-plus/dist/index.css';
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
 export default function registerElements(app) {
   // 注册组件
@@ -117,4 +119,10 @@ export default function registerElements(app) {
 
   // 修改默认属性
   ElDialog.props.closeOnClickModal.default = false;
+
+  // 注册图标
+  app.component(ElIcon.name, ElIcon);
+  for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+    app.component(key, component)
+  }
 }

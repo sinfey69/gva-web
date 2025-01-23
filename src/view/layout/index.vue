@@ -1,7 +1,7 @@
 <template>
   <el-container class="layout-cont">
     <el-container :class="[isSider?'openside':'hideside',isMobile ? 'mobile': '']">
-      <el-row :class="[isShadowBg?'shadowBg':'']" @click.native="changeShadow()" />
+      <el-row :class="[isShadowBg?'shadowBg':'']" @click="changeShadow()" />
       <el-aside class="main-cont main-left">
         <div class="tilte" :style="{background: backgroundColor}">
           <img alt class="logoimg" :src="$CFG.appLogo">
@@ -16,13 +16,16 @@
             :style="{width: `calc(100% - ${isMobile?'0px':isCollapse?'54px':'220px'})`}"
             class="topfix"
           >
-            <el-row>
-              <!-- :xs="8" :sm="6" :md="4" :lg="3" :xl="1" -->
-              <el-header class="header-cont">
+            <el-header class="header-cont">
+              <el-row>
                 <el-col :xs="2" :lg="1" :md="1" :sm="1" :xl="1">
                   <div class="menu-total" @click="totalCollapse">
-                    <i v-if="isCollapse" class="el-icon-s-unfold" />
-                    <i v-else class="el-icon-s-fold" />
+                    <el-icon v-if="isCollapse">
+                      <Expand />
+                    </el-icon>
+                    <el-icon v-else>
+                      <Fold />
+                    </el-icon>
                   </div>
                 </el-col>
                 <el-col :xs="10" :lg="14" :md="14" :sm="9" :xl="14">
@@ -41,44 +44,49 @@
                       <span class="header-avatar" style="cursor: pointer">
                         <CustomPic />
                         <span style="margin-left: 5px">{{ userInfo.nickName }}</span>
-                        <i class="el-icon-arrow-down" />
+                        <el-icon><ArrowDown /></el-icon>
                       </span>
-                      <el-dropdown-menu slot="dropdown" class="dropdown-group">
-                        <el-dropdown-item>
-                          <span style="font-weight: 600;">
-                            当前角色：{{ userInfo.authority.authorityName }}
-                          </span>
-                        </el-dropdown-item>
-                        <template v-if="userInfo.authorities">
-                          <el-dropdown-item v-for="item in userInfo.authorities.filter(i=>i.authorityId!==userInfo.authorityId)" :key="item.authorityId" @click.native="changeUserAuth(item.authorityId)">
-                            <span>
-                              切换为：{{ item.authorityName }}
+                      <template v-slot:dropdown>
+                        <el-dropdown-menu class="dropdown-group">
+                          <el-dropdown-item>
+                            <span style="font-weight: 600;">
+                              当前角色：{{ userInfo.authority.authorityName }}
                             </span>
                           </el-dropdown-item>
-                        </template>
-                        <el-dropdown-item icon="el-icon-s-custom" @click.native="toPerson">个人信息</el-dropdown-item>
-                        <el-dropdown-item icon="el-icon-table-lamp" @click.native="LoginOut">登 出</el-dropdown-item>
-                      </el-dropdown-menu>
+                          <template v-if="userInfo.authorities">
+                            <el-dropdown-item v-for="item in userInfo.authorities.filter(i=>i.authorityId!==userInfo.authorityId)" :key="item.authorityId" @click="changeUserAuth(item.authorityId)">
+                              <span>
+                                切换为：{{ item.authorityName }}
+                              </span>
+                            </el-dropdown-item>
+                          </template>
+                          <el-dropdown-item @click="toPerson"><el-icon><Avatar /></el-icon>个人信息</el-dropdown-item>
+                          <el-dropdown-item @click="LoginOut"><el-icon><Close /></el-icon>登 出</el-dropdown-item>
+                        </el-dropdown-menu>
+                      </template>
                     </el-dropdown>
                   </div>
                 </el-col>
-
-              </el-header>
-            </el-row>
+              </el-row>
+            </el-header>
             <!-- 当前面包屑用路由自动生成可根据需求修改 -->
             <!--
             :to="{ path: item.path }" 暂时注释不用-->
             <HistoryComponent />
           </div>
         </transition>
-        <transition mode="out-in" name="el-fade-in-linear">
-          <keep-alive>
-            <router-view v-if="$route.meta.keepAlive && reloadFlag" v-loading="loadingFlag" element-loading-text="正在加载中" class="admin-box" />
-          </keep-alive>
-        </transition>
-        <transition mode="out-in" name="el-fade-in-linear">
-          <router-view v-if="!$route.meta.keepAlive && reloadFlag" v-loading="loadingFlag" element-loading-text="正在加载中" class="admin-box" />
-        </transition>
+        <router-view v-slot="{ Component }" v-if="$route.meta.keepAlive && reloadFlag" v-loading="loadingFlag" element-loading-text="正在加载中" class="admin-box" >
+          <transition mode="out-in" name="el-fade-in-linear">
+            <keep-alive>
+              <component :is="Component" />
+            </keep-alive>
+          </transition>
+        </router-view>
+        <router-view v-slot="{ Component }" v-if="!$route.meta.keepAlive && reloadFlag" v-loading="loadingFlag" element-loading-text="正在加载中" class="admin-box">
+          <transition mode="out-in" name="el-fade-in-linear">
+              <component :is="Component" />
+          </transition>
+        </router-view>
         <BottomInfo />
         <setting />
       </el-main>

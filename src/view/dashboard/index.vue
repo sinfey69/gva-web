@@ -64,7 +64,7 @@
           :key="key"
           :span="4"
           :xs="8"
-          @click.native="toTarget(card.name)"
+          @click="toTarget(card.name)"
         >
           <el-card shadow="hover" class="grid-content">
             <i :class="card.icon" :style="{ color: card.color }" />

@@ -1,7 +1,6 @@
 import { fileURLToPath, URL } from 'node:url'
 
 import vue from '@vitejs/plugin-vue';
-import path from 'path';
 import { defineConfig, loadEnv } from 'vite';
 import vueDevTools from 'vite-plugin-vue-devtools';
 
@@ -32,7 +31,7 @@ export default defineConfig(({ mode }) => {
     },
     server: {
       port: env.VITE_APP_CLI_PORT,
-      open: true,
+      open: false,  // 是否自动打开浏览器
       overlay: {
         warnings: false,
         errors: true,

@@ -23,10 +23,14 @@
       :style="{display:'inline-block',float:'right',width:'31px',textAlign:'left',fontSize:'16px',paddingTop:'2px'}"
       class="user-box"
     >
-      <i :style="{cursor:'pointer',paddingLeft:'1px'}" class="el-icon-refresh reload" :class="[reload ? 'reloading' : '']" @click="handleReload" />
+      <el-icon :style="{cursor:'pointer',paddingLeft:'1px'}" class="el-icon-refresh reload" :class="[reload ? 'reloading' : '']" @click="handleReload">
+        <Refresh />
+      </el-icon>
     </div>
     <div :style="{display:'inline-block',float:'right'}" class="user-box">
-      <i :style="{cursor:'pointer'}" class="el-icon-search search-icon" @click="showSearch()" />
+      <el-icon :style="{cursor:'pointer'}" class="el-icon-search search-icon" @click="showSearch()">
+        <Search />
+      </el-icon>
     </div>
   </div>
 </template>
