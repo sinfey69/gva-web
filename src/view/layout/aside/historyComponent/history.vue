@@ -75,7 +75,7 @@ export default {
       sessionStorage.setItem('historys', JSON.stringify(this.historys))
       this.activeValue = window.sessionStorage.getItem('activeValue')
       if (now && to && now.name === to.name) {
-        this.$bus.$emit('reload')
+        this.$bus.emit('reload')
       }
     }
   },

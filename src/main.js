@@ -5,7 +5,6 @@ import registerElements from '@/core/element_lazy' // 按需加载element
 import uploader from 'vue-simple-uploader'
 // time line css
 import '../node_modules/timeline-vuejs/dist/timeline-vuejs.css'
-// 路由守卫
 import bus from '@/utils/bus'
 // 加载网站配置文件夹
 import config from '@/core/config'

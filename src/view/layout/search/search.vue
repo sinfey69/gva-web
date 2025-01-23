@@ -66,7 +66,7 @@ export default {
     },
     handleReload() {
       this.reload = true
-      this.$bus.$emit('reload')
+      this.$bus.emit('reload')
       setTimeout(() => {
         this.reload = false
       }, 500)
