@@ -51,6 +51,7 @@ import {
   ElTooltip,
   ElTree,
   ElUpload,
+  ElImage,
   ElIcon
 } from 'element-plus';
 
@@ -106,7 +107,7 @@ export default function registerElements(app) {
   app.component(ElUpload.name, ElUpload);
   app.component(ElProgress.name, ElProgress);
   app.component(ElScrollbar.name, ElScrollbar);
-  app.component(Image.name, Image);
+  app.component(ElImage.name, ElImage);
   app.component(ElColorPicker.name, ElColorPicker);
 
   // 注册指令

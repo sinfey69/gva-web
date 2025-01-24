@@ -11,6 +11,7 @@
           :text-color="baseColor"
           class="el-menu-vertical"
           unique-opened
+          :router="true"
           @select="selectMenuItem"
         >
           <template v-for="item in asyncRouters[0].children">
