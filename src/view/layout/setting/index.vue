@@ -1,9 +1,13 @@
 <template>
   <div>
-    <el-button type="primary" class="drawer-container" icon="el-icon-setting" @click="showSettingDrawer" />
+    <el-button type="primary" class="drawer-container" @click="showSettingDrawer" >
+      <el-icon>
+        <Setting />
+      </el-icon>
+    </el-button>
     <el-drawer
       title="系统配置"
-      :visible.sync="drawer"
+      v-model="drawer"
       :direction="direction"
       :before-close="handleClose"
     >
@@ -13,26 +17,26 @@
           <div class="setting_content">
             <div class="theme-box">
               <div class="item" @click="changeMode('light')">
-                <i v-if="mode === 'light'" class="el-icon-check check" />
+                <el-icon v-if="mode === 'light'" class="check"><Check /></el-icon>
                 <img src="https://gw.alipayobjects.com/zos/antfincdn/NQ%24zoisaD2/jpRkZQMyYRryryPNtyIC.svg">
               </div>
               <div class="item" @click="changeMode('dark')">
-                <i v-if="mode === 'dark'" class="el-icon-check check" />
+                <el-icon v-if="mode === 'dark'" class="check"><Check /></el-icon>
                 <img src="https://gw.alipayobjects.com/zos/antfincdn/XwFOFbLkSM/LCkqqYNmvBEbokSDscrm.svg">
               </div>
             </div>
             <div class="color-box">
               <div>
                 <div class="setting_title">自定义背景色</div>
-                <el-color-picker :value="sideMode" @change="changeMode" />
+                <el-color-picker @change="changeMode" v-model="sideMode" />
               </div>
               <div>
                 <div class="setting_title">自定义基础色</div>
-                <el-color-picker :value="baseColor" @change="changeBaseColor" />
+                <el-color-picker @change="changeBaseColor" v-model="baseColor" />
               </div>
               <div>
                 <div class="setting_title">活跃色</div>
-                <el-color-picker :value="activeColor" @change="activeColorChange" />
+                <el-color-picker @change="activeColorChange" v-model="activeColor" />
               </div>
             </div>
           </div>
