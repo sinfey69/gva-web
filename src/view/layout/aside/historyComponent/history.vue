@@ -4,7 +4,7 @@
       v-model="activeValue"
       :closable="!(historys.length===1&&this.$route.name===defaultRouter)"
       type="card"
-      @contextmenu.prevent.native="openContextMenu($event)"
+      @contextmenu.prevent="openContextMenu"
       @tab-click="changeTab"
       @tab-remove="removeTab"
     >
@@ -13,10 +13,13 @@
         :key="name(item)"
         :label="item.meta.title"
         :name="name(item)"
-        :tab="item"
+        :tab="JSON.stringify(item)"
         class="gva-tab"
+        :ref="name(item)"
       >
-        <span slot="label" :style="{color: activeValue===name(item)?activeColor:'#333'}"><i class="dot" :style="{backgroundColor:activeValue===name(item)?activeColor:'#ddd'}" /> {{ item.meta.title }}</span>
+      <template #label>
+        <span :style="{color: activeValue===name(item)?activeColor:'#333'}"><i class="dot" :style="{backgroundColor:activeValue===name(item)?activeColor:'#ddd'}" /> {{ item.meta.title }}</span>
+      </template>
       </el-tab-pane>
     </el-tabs>
 
@@ -235,8 +238,12 @@ export default {
         getFmtString(this.$route)
       )
     },
-    changeTab(component) {
-      const tab = component.$attrs.tab
+    changeTab(pane, event) {
+      const tabComponent = this.$refs[pane.props.name]
+      // 访问组件实例的 $el 来获取 DOM 元素
+      const tabElement = tabComponent[0].$el;
+      // 获取自定义属性
+      const tab = JSON.parse(tabElement.getAttribute('tab'));
       this.$router.push({
         name: tab.name,
         query: tab.query,
